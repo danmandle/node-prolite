@@ -1,0 +1,21 @@
+{
+  "name": "node-prolite",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danmandle/node-prolite.git"
+  },
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "ejs": "~0.8.5",
+    "express": "~3.4.8",
+    "lodash": "^2.4.1",
+    "serialport": "^1.4.2",
+    "trivial-port": "^0.3.0",
+    "async": "^0.9.0"
+  }
+}

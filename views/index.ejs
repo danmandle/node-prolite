@@ -1,0 +1,101 @@
+<div id='buttons'></div>
+<form id='messageBox'>
+<textarea></textarea>
+<button type="submit"></button>
+</form>
+
+<script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<script type="text/javascript" src-'//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js'></script>
+
+<script>
+
+$( "#messageBox" ).submit(function( event ) {
+	event.preventDefault();
+
+	_.throttle(function(){
+		$.ajax({
+			type: "POST",
+			url: '/sendMessage',
+			data: {message: $('#messageBox textarea').val()}
+		}).success(function(){
+			$('#messageBox textarea').val('');
+		})
+	}, 5000)(); // only every 5 seconds
+});
+
+var commands = [{
+	"colors" : {
+		"dim red" : "<CA>",
+		"red" : "<CB>",
+		"bright red" : "<CC>",
+		"orange" : "<CD>",
+		"bright orange" : "<CE>",
+		"light yellow" : "<CF>",
+		"yellow" : "<CG>",
+		"bright yellow" : "<CH>",
+		"lime" : "<CI>",
+		"dim lime" : "<CJ>",
+		"bright lime" : "<CK>",
+		"bright green" : "<CL>",
+		"green" : "<CM>",
+		"dim green" : "<CN>",
+		"yellow/green/red" : "<CO>",
+		"rainbow" : "<CP>",
+		"red/green 3d" : "<CQ>",
+		"red/yellow 3d" : "<CR>",
+		"green/red 3d" : "<CS>",
+		"green/yellow 3d" : "<CT>",
+		"green on red" : "<CU>",
+		"red on green" : "<CV>",
+		"orange on green 3d" : "<CW>",
+		"lime on red 3d" : "<CX>",
+		"green on red 3d" : "<CY>",
+		"red on green 3d" : "<CZ>",
+	},
+	"sizes": {
+		"Normal (Default)" : "<SA>",
+		"Flashing Normal" : "<SE>",
+		"Bold (Wide)" : "<SB>",
+		"Flashing Bold (Wide)" : "<SF>",
+		"Italic" : "<SC>",
+		"Flashing Italic" : "<SG>",
+		"Bold Italic (Wide)" : "<SD>",
+		"Flashing Bold Italic (Wide)" : "<SH>",
+	},
+	"functions": {
+		"AUTO Random color & presentation" : "<FA>",
+		"OPEN Open from Center" : "<FB>",
+		"COVER Covers Text" : "<FC>",
+		"APPEAR Instantly replaces text" : "<FD>",
+		"CYCLING Rolling Colors" : "<FE>",
+		"CLOSE Blank screen right to left" : "<FF>",
+		"CLOSE Blank screen left to right" : "<FG>",
+		"CLOSE Blank screen outter to center" : "<FH>",
+		"SCROLL UP Scroll up from bottom" : "<FI>",
+		"SCROLL DOWN Scroll down from top" : "<FJ>",
+		"OVERLAP Two layers slide together to form text" : "<FK>",
+		"STACKING Falling dots form text" : "<FL>",
+		"BEEP Sign beeps" : "<FO>",
+		"PAUSE Short delay of motion" : "<FP>",
+		"RANDOM Random dots appear forming text" : "<FR>",
+		"SHIFT Roll message right to left (Default)" : "<FS>",
+		"TIME/DATE Show time and date, no choice of formatting" : "<FT>",
+		"MAGIC Change text color each time" : "<FU>",
+		"Cursive \"Thank you\"" : "<FV>",
+		"Cursive \"Welcome\"" : "<FW>",
+		"SPEED 1" : "<FX>",
+		"SPEED 2" : "<FY>",
+		"SPEED 3" : "<FZ>",
+	}
+}]
+
+$({
+	commands.forEach(function(value, key){
+		$('#buttons').append('<h1>'+ key +'</h1>');
+		_.each(value, function(value,key){
+			$('#buttons').append('<button data-command="'+ value +'">'+ key +'</button>');
+		})
+	});
+})
+
+</script>
